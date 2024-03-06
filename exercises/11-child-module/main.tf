@@ -9,11 +9,12 @@ terraform {
 
 provider "aws" {
   region = "us-west-2"
+  profile = "terraform_profile"
 }
 
-resource "aws_instance" "app_server" {
-  ami           = "ami-077ee47512dc6f3ca"
-  instance_type = "t2.nano"
+module "app_server" {
+  source = "./modules/ec2"
+  ami_id = "ami-077ee47512dc6f3ca"
   tags = {
     Name = "App Server"
   }
