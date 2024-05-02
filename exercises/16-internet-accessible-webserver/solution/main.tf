@@ -1,8 +1,9 @@
 terraform {
   required_providers {
     aws = {
+      #For more information, see the version on the Terraform registry --> https://registry.terraform.io/providers/hashicorp/aws/5.47.0
       source  = "hashicorp/aws"
-      version = "~> 4"
+      version = "~> 5"
     }
   }
 }

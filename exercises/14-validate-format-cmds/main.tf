@@ -1,21 +1,23 @@
 terraform {
   required_providers {
     aws = {
+      #For more information, see the version on the Terraform registry --> https://registry.terraform.io/providers/hashicorp/aws/5.47.0
       source  = "hashicorp/aws"
-      version = "4.17.1"
+      version = "5.47.0"
     }
   }
 }
 
-provider "aws"
-{
-      region = "us-west-2"
-      access_key = "abc"
-      secret_key = "def"
+provider "aws" {
+  //shared_credentials_files = "/Users/gibran/.aws/credentials"
+  profile    = "terraform_profile"
+  region     = "us-west-2"
+  access_key = "abc"
+  secret_key = "def"
 }
 
 resource "aws_instance" "app_server" {
-  ami = var_ami_id
+  ami           = var_ami_id
   instance_type = var.instance_type
-  tags = [var.tags]
+  tags          = [var.tags]
 }

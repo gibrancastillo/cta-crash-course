@@ -1,20 +1,26 @@
 terraform {
+  # https://registry.terraform.io/providers/hashicorp/http/latest
   required_providers {
     http = {
-      source = "hashicorp/http"
-      version = "3.2.1"
+        source = "hashicorp/http"
+        version = "3.4.2"
     }
   }
 }
 
+# define 'weather' data source to issue an HTTP GET request supplying an optional request header.
 data "http" "weather" {
-  url = "https://api.weather.gov/points/39.73,-104.99"
+    url = "https://api.weather.gov/points/39.73,-104.99"
 
-  request_headers = {
-    "Accept" = "application/geo+json"
-  }
+    request_headers = {
+        "Accept" = "application/geo+json"
+    }
 }
 
 output "city" {
-  value = jsondecode(data.http.weather.response_body).properties.relativeLocation.properties.city
+    //value = data.http.weather.response_body
+
+    // Note that jsondecode() is a Terraform built-in function that takes a string and converts it to a JSON object.
+    value = jsondecode(data.http.weather.response_body)
+    //value = jsondecode(data.http.weather.response_body).properties.relativeLocation.properties.city
 }

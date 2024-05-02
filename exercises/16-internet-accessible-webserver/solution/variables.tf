@@ -1,6 +1,7 @@
 variable "profile_name" {
   type    = string
-  default = "default"
+  //shared_credentials_files = "/Users/gibran/.aws/credentials"
+  default = "terraform_profile"
 }
 
 variable "region" {
